@@ -383,7 +383,7 @@ class ChannelListViewController: UIViewController,UITableViewDelegate,UITableVie
         
         ifReadView.backgroundColor = UIColor.clear
         
-        
+        "hahah"
         var messageRef: FIRDatabaseReference = cellChannelRef.child("messages")
         var newMessageRefHandle: FIRDatabaseHandle?
         subtitle.text = "No recent messages"
