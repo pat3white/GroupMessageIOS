@@ -98,8 +98,8 @@ class GroupInfoViewController: UIViewController, UITableViewDataSource,UITableVi
     @IBAction func leaveGroupPressed(_ sender: Any) {
         
         var groupUsersRef: FIRDatabaseReference = channelRef!.child("users")
-        print(currentUserGroupRef)
-        print(groupUsersRef)
+        ///print(currentUserGroupRef)
+        //print(groupUsersRef)
         
         groupUsersRef.child(currentUserGroupRef).removeValue { error in
            if error != nil {

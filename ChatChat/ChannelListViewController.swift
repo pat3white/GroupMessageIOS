@@ -134,15 +134,19 @@ class ChannelListViewController: UIViewController,UITableViewDelegate,UITableVie
         NotificationCenter.default.addObserver(self, selector: #selector(self.keyboardWillHideNotification(_:)), name: NSNotification.Name.UIKeyboardWillHide, object: nil)
         
        
+        UIView.animate(withDuration: 1.0, delay: 0.0, options: [], animations: {
+            
 
-        
+        }, completion: { finished in
+            print("Napkins opened!")
+        })
         nameTextField.delegate = self
     }
     
     
     func colors(row:Int) -> UIColor{
         
-        let colorsToChoose = [FlatRedDark(),FlatMaroonDark(),FlatYellowDark(),FlatMintDark(),FlatBlueDark(),FlatMaroonDark(),FlatWatermelonDark(),FlatOrangeDark()]
+        let colorsToChoose = [FlatRed(),FlatMagenta(),FlatMint(),FlatWatermelon(),FlatYellow()]
             
             //UIColor(netHex: 0xBB9BFE),UIColor(netHex: 0xFE9476),UIColor(netHex: 0xF7ED91),UIColor(netHex: 0x7BE987),UIColor(netHex: 0x38F1FA)]
         
@@ -378,7 +382,7 @@ class ChannelListViewController: UIViewController,UITableViewDelegate,UITableVie
         let channel = channels[(indexPath as NSIndexPath).section]
         //print(channel.id)
         let cellChannelRef = channelRef.child(channel.id)
-        
+        //print(channel.name)
 
         
         ifReadView.backgroundColor = UIColor.clear
@@ -387,15 +391,19 @@ class ChannelListViewController: UIViewController,UITableViewDelegate,UITableVie
         var messageRef: FIRDatabaseReference = cellChannelRef.child("messages")
         var newMessageRefHandle: FIRDatabaseHandle?
         subtitle.text = "No recent messages"
+        
         let messageQuery = messageRef.queryLimited(toLast:1)
+        
+        
         newMessageRefHandle = messageQuery.observe(.childAdded, with: { (snapshot) -> Void in
-
+            
             print(channel.name)
             let messageData = snapshot.value as! Dictionary<String, String>
             //print(channel.id,snapshot.key)
             
             let messageKey = snapshot.key
             //print(indexPath)
+            
             if UserDefaults.standard.value(forKey: "dict") != nil{
                 
                 
@@ -434,7 +442,8 @@ class ChannelListViewController: UIViewController,UITableViewDelegate,UITableVie
                 ifReadView.backgroundColor = FlatWhite()
                 UserDefaults.standard.set(dict, forKey: "dict")
             }
-            
+ 
+ 
             if let id = messageData["senderId"] as String!, let name = messageData["senderName"] as String!, let text = messageData["text"] as String!,var ms = messageData["ms"] as String!, text.characters.count > 0 {
                 // 4
                 
@@ -461,6 +470,8 @@ class ChannelListViewController: UIViewController,UITableViewDelegate,UITableVie
             } else {
                 //print("Error! Could not decode message data")
             }
+            
+ 
         })
         
         title.text = channel.name
@@ -469,6 +480,14 @@ class ChannelListViewController: UIViewController,UITableViewDelegate,UITableVie
         dateLabel.textColor = FlatGray()
         subtitle.textColor =  FlatGray()
         
+        
+
+
+        ifReadView.layer.borderColor = FlatWhite().cgColor
+            //colors(row: indexPath.section).cgColor
+        ifReadView.layer.borderWidth = 1.5
+        
+
         ifReadView.layer.cornerRadius = ifReadView.frame.size.width/2
         ifReadView.clipsToBounds = true
         
@@ -483,6 +502,7 @@ class ChannelListViewController: UIViewController,UITableViewDelegate,UITableVie
         
         cell.backgroundColor = UIColor.clear
         cell.contentView.backgroundColor = UIColor.clear
+ 
         
         return cell
     }

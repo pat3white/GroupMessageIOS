@@ -35,6 +35,7 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
     FIRApp.configure()
     
     registerForPushNotifications()
+    UIApplication.shared.statusBarStyle = .default
     
     /*
     let token = FIRMessaging.messaging().fcmToken

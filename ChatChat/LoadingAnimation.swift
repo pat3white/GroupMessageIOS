@@ -6,6 +6,7 @@
 //  Copyright © 2017 Razeware LLC. All rights reserved.
 //
 import UIKit
+import ChameleonFramework
 
 @IBDesignable
 class SpinnerView : UIView {
@@ -105,7 +106,7 @@ class SpinnerView : UIView {
         let animation = CAKeyframeAnimation(keyPath: "strokeColor")
         animation.keyTimes = (0 ... count).map { NSNumber(value: CFTimeInterval($0) / CFTimeInterval(count)) }
         animation.values = (0 ... count).map {_ in 
-            UIColor(netHex: 0x00dcfe).cgColor
+            FlatWhite().cgColor
         }
         animation.duration = duration
         animation.calculationMode = kCAAnimationLinear

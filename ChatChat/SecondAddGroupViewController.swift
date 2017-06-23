@@ -223,7 +223,7 @@ class SecondAddGroupViewController: UIViewController,UISearchBarDelegate, UISear
     }
     
     @IBAction func saveGroup(_ sender: Any) {
-        
+        self.view.layoutIfNeeded()
         
         // 1
         if justAddUsers == false{

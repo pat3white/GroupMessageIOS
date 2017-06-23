@@ -66,6 +66,7 @@ final class ChatViewController: JSQMessagesViewController {
     
   override func viewDidLoad() {
     super.viewDidLoad()
+    self.navigationItem.backBarButtonItem?.title = ""
     
     //print("haha")
     //removing avatar
@@ -90,7 +91,7 @@ final class ChatViewController: JSQMessagesViewController {
     self.navigationController?.navigationBar.titleTextAttributes = [NSForegroundColorAttributeName: UIColor.flatBlack(),NSFontAttributeName: UIFont (name: "HelveticaNeue-Light", size: 20)!]
     self.navigationController?.navigationBar.tintColor = FlatBlack()
     
-
+    self.navigationItem.leftBarButtonItem?.width = 5
 
     }
   
@@ -250,14 +251,14 @@ final class ChatViewController: JSQMessagesViewController {
             if (indexPath.item % 6 == 0) {
                 print("yes1")
                 let accentView = UIView(frame: CGRect(x: newX, y: 0, width: 2.5, height: cell.bounds.height))
-                accentView.backgroundColor = FlatBlack()
+                accentView.backgroundColor = UIColor.clear
                 accentView.layer.cornerRadius = 0.8
                 accentView.layer.masksToBounds = true
                 cell.contentView.insertSubview(accentView, at: 0)
             }else{
                 print("yes2")
                 let accentView = UIView(frame: CGRect(x: newX, y: 0, width: 2.5, height: cell.bounds.height))
-                accentView.backgroundColor = FlatBlack()
+                accentView.backgroundColor = UIColor.clear
                 accentView.layer.cornerRadius = 0.8
                 accentView.layer.masksToBounds = true
                 cell.contentView.insertSubview(accentView, at: 0)
@@ -281,7 +282,7 @@ final class ChatViewController: JSQMessagesViewController {
             //print(message.senderId)
             let index = getIndexOfSenderID(idToFind: message.senderId, arrayToSearch: self.currentUsers)
             //print(index)
-            accentView.backgroundColor = colors(row: index)
+            accentView.backgroundColor = UIColor.clear
             accentView.layer.cornerRadius = 0.8
             accentView.layer.masksToBounds = true
             cell.contentView.insertSubview(accentView, at: 0)
